@@ -29,17 +29,17 @@ public class User {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
-    public void setPassword(String password) {
-        try {
-            MessageDigest md = MessageDigest.getInstance("SHA-512");
-            md.update(password.getBytes(),0, password.getBytes().length);
-            this.password = new BigInteger(1,md.digest()).toString(16);
-        } catch (NoSuchAlgorithmException e) {
-            Logger logger = LoggerFactory.getLogger(User.class);
-            logger.warn(e.getMessage());
-        }
-
-    }
+//    public void setPassword(String password) {
+//        try {
+//            MessageDigest md = MessageDigest.getInstance("SHA-512");
+//            md.update(password.getBytes(),0, password.getBytes().length);
+//            this.password = new BigInteger(1,md.digest()).toString(16);
+//        } catch (NoSuchAlgorithmException e) {
+//            Logger logger = LoggerFactory.getLogger(User.class);
+//            logger.warn(e.getMessage());
+//        }
+//
+//    }
 
     @Column(nullable = false)
     private String name;
