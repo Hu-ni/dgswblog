@@ -47,8 +47,11 @@ public class User {
     private String email;
     @Column(unique = true, length = 20)
     private String phone;
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private String profilePath;
+//    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+//    private String profilePath;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    private Attachment profile;
 
     @CreationTimestamp
     @Column(nullable = false, updatable = false)

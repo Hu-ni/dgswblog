@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
                     user.setName(Optional.ofNullable(u.getName()).orElse(user.getName()));
                     user.setEmail(Optional.ofNullable(u.getEmail()).orElse(user.getEmail()));
                     user.setPhone(Optional.ofNullable(u.getPhone()).orElse(user.getPhone()));
-                    user.setProfilePath(Optional.ofNullable(u.getProfilePath()).orElse(user.getProfilePath()));
+                    user.setProfile(Optional.ofNullable(u.getProfile()).orElse(user.getProfile()));
 
                     return ur.save(user);
                 }).orElse(null);

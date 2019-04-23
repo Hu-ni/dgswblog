@@ -22,17 +22,9 @@ public class PostServiceImpl implements PostService {
     @Autowired
     private UserRepository ur;
 
-    @PostConstruct
-    private void init(){
-        ur.save(new User("a", "123", "test"));
-        pr.save(new Post(1L,"123","123"));
-        pr.save(new Post(1L,"123","123"));
-        pr.save(new Post(1L,"123","123"));
-    }
-
     @Override
     public List<PostUserInfoProtocol> postList() {
-        List<PostUserInfoProtocol> pup = new ArrayList<PostUserInfoProtocol>();
+        List<PostUserInfoProtocol> pup = new ArrayList<>();
         pr.findAll().forEach(post -> {
             String name = ur.findById(post.getUserId())
                     .map(User::getName)
@@ -43,9 +35,9 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public PostUserInfoProtocol findPost(Long id) {
+    public PostUserInfoProtocol findPost(Long userId) {
         PostUserInfoProtocol pup = null;
-        return pr.findById(id)
+        return pr.findTopByUserIdOrderByIdDesc(userId)
                 .map(post -> {
                     String name = ur.findById(post.getUserId())
                             .map(User::getName)
@@ -69,7 +61,7 @@ public class PostServiceImpl implements PostService {
                     post.setUserId(Optional.ofNullable(p.getUserId()).orElse(post.getUserId()));
                     post.setTitle(Optional.ofNullable(p.getTitle()).orElse(post.getTitle()));
                     post.setContent(Optional.ofNullable(p.getContent()).orElse(post.getContent()));
-                    post.setFilePath(Optional.ofNullable(p.getFilePath()).orElse(post.getFilePath()));
+                    post.setPictures(Optional.ofNullable(p.getPictures()).orElse(post.getPictures()));
                     post.setCreated(Optional.ofNullable(p.getCreated()).orElse(post.getCreated()));
                     post.setModified(Optional.ofNullable(p.getModified()).orElse(post.getModified()));
 
