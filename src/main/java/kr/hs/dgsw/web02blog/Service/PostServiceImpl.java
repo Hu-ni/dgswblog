@@ -4,6 +4,7 @@ import kr.hs.dgsw.web02blog.Protocol.PostUserInfoProtocol;
 import kr.hs.dgsw.web02blog.Repository.PostRepository;
 import kr.hs.dgsw.web02blog.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public List<PostUserInfoProtocol> postList() {
         List<PostUserInfoProtocol> pup = new ArrayList<>();
-        pr.findAll().forEach(post -> {
+        pr.findAll(new Sort(Sort.Direction.DESC, "id")).forEach(post -> {
             String name = ur.findById(post.getUserId())
                     .map(User::getName)
                     .orElse(null);
@@ -35,8 +36,35 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public PostUserInfoProtocol findPost(Long userId) {
-        PostUserInfoProtocol pup = null;
+    public List<PostUserInfoProtocol> postList(Long id) {
+        return pr.findAllByUserIdOrderByIdDesc(id)
+                .map(posts -> {
+                    List<PostUserInfoProtocol> pup = new ArrayList<>();
+                    posts.forEach(post -> {
+                       String name = ur.findById(post.getUserId())
+                               .map(User::getName)
+                               .orElse(null);
+                       pup.add(new PostUserInfoProtocol(post, name));
+                   });
+                    return pup;
+                })
+                .orElse(null);
+    }
+
+    @Override
+    public PostUserInfoProtocol findPostByPostId(Long postId){
+        return pr.findById(postId)
+                .map(post ->{
+                    String name = ur.findById(post.getUserId())
+                            .map(User::getName)
+                            .orElse(null);
+                    return new PostUserInfoProtocol(post, name);
+                })
+                .orElse(null);
+    }
+
+    @Override
+    public PostUserInfoProtocol findPostByUserId(Long userId) {
         return pr.findTopByUserIdOrderByIdDesc(userId)
                 .map(post -> {
                     String name = ur.findById(post.getUserId())
@@ -56,7 +84,7 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public PostUserInfoProtocol updatePost(Long id, Post p) {
-        return pr.findById(p.getId())
+        return pr.findById(id)
                 .map(post -> {
                     post.setUserId(Optional.ofNullable(p.getUserId()).orElse(post.getUserId()));
                     post.setTitle(Optional.ofNullable(p.getTitle()).orElse(post.getTitle()));

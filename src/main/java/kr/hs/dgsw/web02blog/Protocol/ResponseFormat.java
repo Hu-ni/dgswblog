@@ -15,6 +15,7 @@ public class ResponseFormat {
         this.desc = option instanceof Long || option instanceof String
                 ? String.format(rt.desc(), option)
                 : rt.desc();
+        this.data = data;
     }
 
     public ResponseFormat(ResponseType rt, Object data){

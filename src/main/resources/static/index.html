@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="style.css" rel="stylesheet"/>
+    <script
+            src="https://code.jquery.com/jquery-3.4.0.js"
+            integrity="sha256-DYZMCC8HTC+QDr5QNaIcfR7VSPtcISykd+6eSmBW5qo="
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<header class="container">
+    HEADER
+</header>
+<aside class="container left-container">
+    <button id="write-post-button" onclick="writePost()">새글쓰기</button>
+    <div id="show-post-list">
+    </div>
+</aside>
+<section id="main-container" class="container">
+    <div class="content">
+
+    </div>
+</section>
+<aside class="container right-container">
+    <div id="user-info">
+        <div id="user-profile-container">
+            <img id="user-profile" src="" onerror="this.src='/img/user-profile.jpg'"/>
+        </div>
+        <div id="user-details">
+            <div id="user-details-account">사용자아이디</div>
+            <div id="user-details-email">사용자이메일</div>
+            <div id="user-details-created">가입일</div>
+            <div id="user-details-posts">게시글 수</div>
+        </div>
+    </div>
+</aside>
+<footer class="footer container">
+    FOOTER
+</footer>
+<script src="node_modules/jquery/dist/jquery.min.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>

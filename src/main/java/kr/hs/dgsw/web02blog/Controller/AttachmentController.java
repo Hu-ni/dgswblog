@@ -36,9 +36,9 @@ public class AttachmentController {
     @PostConstruct
     private void init(){
         ur.save(new User("a", "123", "test"));
-        pr.save(new Post(1L,"123","123"));
-        pr.save(new Post(1L,"123","123"));
-        pr.save(new Post(1L,"123","123"));
+        pr.save(new Post(1L,"1","123"));
+        pr.save(new Post(1L,"2","123"));
+        pr.save(new Post(1L,"3","123"));
         ar.save(new Attachment("D:\\c0062637_4b2e3fdb6363b.jpg", 1L));
     }
 

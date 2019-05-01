@@ -9,3 +9,21 @@ GET http://localhost:8080/postList
 Accept: application/json
 
 ###
+
+POST http://localhost:80/api/item
+Content-Type: application/json
+
+{}
+
+###
+
+PUT http://localhost:8080/updatePost/1
+Content-Type: application/json
+
+{
+  "userId": "1",
+  "content": "456",
+  "title": "5"
+}
+
+###

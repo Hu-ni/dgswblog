@@ -19,14 +19,25 @@ public class PostController {
 
 
     @GetMapping("/postList")
-    public List<PostUserInfoProtocol> list(){
-//        return new ResponseFormat(ResponseType.POST_GET_ALL,ps.postList());
-        return ps.postList();
+    public ResponseFormat list(){
+        return new ResponseFormat(ResponseType.POST_GET_ALL,ps.postList());
+//        return ps.postList();
     }
 
-    @GetMapping("/findPost/{id}")
-    public ResponseFormat findPost(@PathVariable Long id){
-        return new ResponseFormat(ResponseType.POST_GET,ps.findPost(id));
+    @GetMapping("/postListByUserId/{id}")
+    public ResponseFormat listByUserId(@PathVariable Long id){
+        return new ResponseFormat(ResponseType.POST_GET_ALL,ps.postList(id));
+//        return ps.postList();
+    }
+
+    @GetMapping("findPostByPostId/{id}")
+    public ResponseFormat findPostByPostId(@PathVariable Long id){
+        return new ResponseFormat(ResponseType.POST_GET,ps.findPostByPostId(id));
+    }
+
+    @GetMapping("/findPostByUserId/{id}")
+    public ResponseFormat findPostByUserId(@PathVariable Long id){
+        return new ResponseFormat(ResponseType.POST_GET,ps.findPostByUserId(id));
     }
 
     @PostMapping("/writePost")

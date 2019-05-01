@@ -7,7 +7,9 @@ import java.util.List;
 
 public interface PostService {
     List<PostUserInfoProtocol> postList();
-    PostUserInfoProtocol findPost(Long userId);
+    List<PostUserInfoProtocol> postList(Long id);
+    PostUserInfoProtocol findPostByPostId(Long postId);
+    PostUserInfoProtocol findPostByUserId(Long userId);
     PostUserInfoProtocol writePost(Post p);
     PostUserInfoProtocol updatePost(Long id, Post p);
     boolean deletePost(Long id);
